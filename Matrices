@@ -1,0 +1,50 @@
+#matrices
+
+m <- matrix(c(1,2,3) , nrow = 3, ncol = 3)
+m
+
+M<- matrix(c(3:14), nrow = 4, byrow = TRUE)
+M
+
+m <- matrix(c(3:16), nrow = 7, byrow = FALSE)
+m
+
+#addition of matrices
+
+m+m
+
+#create a matrix
+
+m <- matrix(c(seq(from = -98,to=100,by=2)),nrow = 20,ncol = 5)
+m
+
+# cbind
+
+c(1,2,3) -> a
+c(5,6,7) -> b
+cbind(a,b) -> c
+c
+
+# rbind
+
+c(1,2,3) -> a
+c(5,6,7) -> b
+rbind(a,b) -> c
+c
+
+# transpose the dimensions of the table 
+
+t(c)
+
+#matrix
+x <- matrix(1:6, 2, 3)
+x
+
+#matrix operations
+x <- matrix(1:4, 2, 2)
+x
+y <- matrix(rep(10, 4), 2, 2)
+y
+
+#element-wise multiplication
+x*y
