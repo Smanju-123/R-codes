@@ -1,0 +1,81 @@
+######### R Basics ##########
+
+
+2+3
+9-5
+4*32
+29/2
+
+# Sample graphs
+require(graphics)
+
+x <- seq(-4, 4, length.out = 101)
+y <- cbind(sin(x), cos(x))
+matplot(x, y, type = "l", xaxt = "n",
+        main = expression(paste(plain(sin) * phi, "  and  ",
+                                plain(cos) * phi)),
+        ylab = expression("sin" * phi, "cos" * phi), # only 1st is taken
+        xlab = expression(paste("Phase Angle ", phi)),
+        col.main = "blue")
+axis(1, at = c(-pi, -pi/2, 0, pi/2, pi),
+     labels = expression(-pi, -pi/2, 0, pi/2, pi))
+
+
+############ R Basic Mathematics ##########
+
+
+
+# Basic mathematics
+
+(14.87)^(6/3)
+
+log(95)
+
+3^-4
+
+#assingning values to variables
+
+13.5 -> x
+
+12.7 -> y
+
+# assigning multiple vectors to one variable
+c(1,2,3) -> y
+
+# type nos in keyboard using scan fn.
+scan() -> a
+a
+
+# PLAYING AROUND for practice
+# repeat anything for 30 times
+rep("Smanju",30)
+
+# repeated series
+rep(1:6,2)
+
+# elements of series to be repeated
+rep(1:6,rep(3,6))
+#here we are using (3,6) to need we group in in 3s
+#rep(1:6,rep(3,7))
+#TRY rep(1:6,rep(3,5))
+
+# generating test
+gl(5,2,30)
+# for repeating the whole pattern, specify the total length
+gl(5,2,30)
+
+# print 1 to 5,in a set for 2 nos for 30 numbers
+
+
+c(-1,2,3) -> x
+
+min(x)
+
+max(x)
+
+mean(x)
+
+x+x
+
+
+
