@@ -1,0 +1,134 @@
+########### subscript ##############
+x <- c("a", "b", "c", "c", "d", "a" )
+x[1]
+
+##### Data_manipulation ##########
+
+#read.csv
+customer_churn <- read.csv(choose.files(), header = T)
+
+
+class(customer_churn)
+#tenure is a vector - homogeneous entities
+class(customer_churn$tenure)
+#gender is a factor - categorical values
+class(customer_churn$gender)
+class(customer_churn$InternetService)
+
+
+
+
+###### Data set_basics ########
+
+customer_churn <- read.csv(choose.files(), header = T)
+
+
+
+#Access column - style 1
+customer_churn$DeviceProtection -> dev
+View(dev)
+
+# Access one column - style 2
+customer_churn[,2] -> gen
+View(gen)
+
+#selecting multiple columns
+customer_churn[,c(2, 6, 7)] -> multi_col
+View(multi_col)
+
+#selecting sequence of columns
+customer_churn[,c(1:6)]
+
+#selecting rows and col in a seq and random
+customer_churn[50:60, c(2, 3)] -> mixed_col_rows
+View(mixed_col_rows)
+
+#more complex rows and cols
+customer_churn[c(50:60, 2000:3000), c(2, 3)] -> complex_mix
+View(complex_mix)
+
+#accessing a cell with a row
+customer_churn$tenure[1] +8 -> customer_churn$tenure[1]
+customer_churn$tenure[1]
+
+#10% discount on an item
+customer_churn$tenure[9]*9 -> customer_churn$tenure[9]
+customer_churn$tenure[9]
+
+#50% discount
+customer_churn$tenure[8]/2 -> customer_churn$tenure[8]
+customer_churn$tenure[8]
+
+#logical operators
+customer_churn$tenure > 60 -> customer_churn_tenure
+View(customer_churn_tenure)
+
+#if you want to check where the values are >60 we can do it
+subset(customer_churn,customer_churn_tenure == T) -> customer_churn_tenure
+View(customer_churn_tenure)
+
+#multiple conditions
+customer_churn$gender == "Male" & customer_churn$SeniorCitizen == 1 ->cgs
+View(cgs)
+subset(customer_churn, cgs == T) -> cgs
+View(cgs)
+
+#select customers who are DSL or Fiber optic
+customer_churn$InternetService == "DSL"& customer_churn$InternetService == "Fiber optic" -> cdf
+View(cdf)
+subset(customer_churn, cdf == T) -> cdf
+View(cdf)
+
+######## Subsetting and reading files ##
+
+# First 10 elements of the built-in- data frame mtcars
+my_df <- mtcars[1:5, ]
+my_df
+
+# Creating list with these different elements
+my_list <- list(my_vector, my_matrix, my_df)
+my_list
+
+# Adding name
+my_list_1 <- list(Vector = my_vector, Matrix = my_matrix, Dataframe = my_df)
+my_list_1
+
+str(my_list_1)
+
+###### Subsetting list
+x <- list(foo = 1:4, bar = 0.6)
+x
+x[2]
+
+x[[2]]
+
+y1 <- list(abc = 1:7, cde = 0.2, efg = 1)
+y1
+# method 1 to call a column
+y1$abc
+# method 2 to call a column
+y1["abc"]
+
+x$foo
+x$bar
+
+x["bar"]
+
+x <- list(foo = 1:4, bar = 0.6, baz = "hello")
+x[c(1, 3)]   # access 1 and 3 columns
+name <- "foo"
+name
+
+x[[name]]  ## computed index for 'foo'
+x$name ## element 'name' doesn't exist! 
+
+x$foo
+
+
+## Subsetting nested elements of a list
+x <- list(a = list(10, 12, 14), b = c(3.14, 2.81))
+x
+x[[c(1, 3)]]
+x[[1]][[3]]
+x[[c(2, 1)]]
+
