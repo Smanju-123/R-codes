@@ -1,0 +1,411 @@
+##########################17-10-2022##########################Loops and Functions-if else loop and print function########
+
+
+A <- c("ACDNNDHNV")
+B <- c("KJSDFKSBL")
+A != B
+A = B
+A == B
+
+# INEQUALITY !#
+TRUE != TRUE
+TRUE != FALSE
+
+# comparision of numerics
+
+"useR "== "user"
+
+# If condition and print function
+
+a <- -3
+
+if(a == 0){
+  print("a is zero")
+}
+
+if (a < 0){
+  print("a is a negative number")
+}
+
+if(a != 0)
+{
+  print("a is non zero number")
+}
+
+v <- c(13, 12, 12, 13)
+ifelse(v %% 2==1, "odd", "even")
+
+v <- c(1,2,3,5,6,7)
+ifelse(v %% 2==1, "odd", "even")
+
+# Nested condition
+x <- 32 
+if (x>1){
+  print("More then one")
+  if (x<100){
+    print("Less than 100")
+  }
+}
+
+if (x != 1){
+  print("X is not equals to 1")
+  if (x != 0){
+    print("x is not equals to 0")
+  }
+}
+
+a <- 3
+
+# Ifelse condition
+
+if(a < 0){
+  print("a is a positive number")
+} else{
+  print("a is a negative number or zero")
+}
+
+x <- 33
+
+if(x>2){
+  print("Bigger")
+}else{
+  print("Smaller")
+}
+
+S <- 32
+
+if(S<100){
+  print("s is less than hundred")
+}else{
+  print("s is greater than hundred")
+}
+
+#else if
+
+c <- 0
+if(c<0){
+  print("c is a negative number")
+}else if(c==0){
+  print("c is a zero")
+}else{
+  print("c is a positive number")
+}
+
+x <- 6
+if(x %% 2==0){
+  print("divisible by two")
+}else if(x %% 3==0){
+  print("divisible by three")
+}else{
+  print("neither divisible by two or three")
+}
+### Adding columns using ifelse
+
+x <- data.frame("Student" = c("Ron","Jake","Ava","Sophia","Mia"), "Marks" = c(35, 75, 45, 30, 85))
+x
+x$Result <- ifelse(x$Marks > 40, "Pass", "Fail")
+x
+
+
+
+############### 18-10-2022 ################## For loop, while loop, functions#
+
+
+################################################################################
+################################ FOR loop ######################################
+################################################################################
+
+## FOR loop
+# Structure of For loop
+for (i in seq) {
+  expr
+}
+
+A <- 1:5
+print(A)
+
+for(var in A){
+  print(var)
+}
+# i is iteration variable and 1:5 is sequence
+# print(i) is your block body or code. It will execute each value in the sequence
+
+
+for (i in 1:5){
+  print(i)
+}
+
+even <- c(2,4,6,8,10,12,14,16,18,20)
+for(n in even){
+  print(n)
+}
+
+#OR
+#seq(start, stop, step)
+seq(0, 20, 1)
+
+for (n in seq(2, 20, 2)){
+  print(n)
+}
+
+# sequence function : first position is starting, second is finishing and third is 
+
+for (i in seq(1, 10, 2)){
+  print(paste("i is now", i))
+}
+fruit <- c("Apple", "Pear")
+print(nchar(fruit))
+length(fruit)
+
+# nchar will count all alphabets
+
+number <- "9,223,372,123,132,313,123"
+for (i in seq(3, nchar(number))){
+  print(i)
+}
+nchar(number)
+
+
+# Print largest number
+largest <- 15
+
+x <- c(9, 13, 132, 5767, 2323)
+
+for(i in x){
+  if (i > largest){
+    largest = i
+    print(largest)
+  }
+}
+
+cities <- c("New York", "paris", "London", "Tokyo", "Mumbai", "Rio de Janerio",
+            "Cape Town")
+
+for(city in cities) {
+  print(city)
+}
+
+### break statement
+for (city in cities){
+  if (nchar(cities) == 6){
+    break
+  }
+  print(city)
+}
+
+#for loop abondened before London as nchar = 5 for, so no print out
+
+# next statement
+for(city in cities){
+  if(nchar(city) == 6){
+    next       # next : skip to next itireation
+  }
+  print(city)
+}
+# "London" will not be printed
+
+#write table
+# 2 x 1 = 2
+for (i in 2:10){
+  for(j in 1:10){
+    print(paste(i, "x", j, "=", i*j))
+  }
+}
+
+################################################################
+######################While loop################################
+################################################################
+while(condition){
+  expr
+}
+
+x = 0
+while (x <= 20){
+  print(x)
+  x = x + 2   # this step is called incrementing and we are incrementing it by 2
+}
+
+ctr <- 1
+while(ctr <= 7){  #TRUE
+  print(paste("ctr is set to", ctr))
+  ctr <- ctr + 1        #increment ctr
+}
+
+
+### break statement
+ctr <- 1
+while(ctr <= 10){    # TRUE
+  if(ctr %% 5 ==0){
+    break  # Break if ctr is a 5-fold
+  }
+  print(paste("ctr is set to", ctr))
+  ctr <- ctr + 1    # increment
+}
+
+################################################################
+###################### Functions and Expressions ###############
+################################################################
+
+# A function takes arguments as input and returns an object as output.  
+# There are functions to do all sort of things.
+# example: list(),
+# print(), mean(), sd(), 
+# Functions work like a black box
+# Argument matching: by position or by name
+# Function arguments can have defaults
+
+my_fun <- function(arg1, arg2)
+{body
+}
+
+# Lets write first function
+coin_sides <- c("head", "tail")
+
+# Sample from coin_sides once
+sample(coin_sides, size = 3, replace = TRUE)
+
+# Write a template for your function, toss_coin()
+toss_coin <- function() {
+  # (Leave the contents of the body for later)
+  # Add punctuation to finish the body
+}
+
+#Your script, from a previous step
+# Paste your script into the function body
+toss_coin <- function() {
+  coin_sides <- c("head", "tail",
+                  sample(coin_sides, 1))
+}
+
+# Call your function
+toss_coin()
+
+3 * x
+# The triple() function
+triple <- function(x){
+  3 * x
+}
+
+triple(8) # numeric 6 matched to argument x(by pos). Function body is executed:
+
+############### 19-10-2022 ################## For loop,functions, apply, lapply#
+
+
+a*b +a/b
+#candy_magic function
+candy_magic <- function(a, b){
+  a*b +a/b
+}
+candy_magic(3, 2) # a & b arguments are present
+
+# Multiple inputs to functions
+coin_sides <- c("head", "tail")
+n_flips <- 10
+p_head <- 0.8
+
+# Define a vector of weights
+weights <- p_head + (1-p_head)
+
+#update so that heads are sampled with prob p_head
+sample(coin_sides, n_flips, replace = TRUE, prob = c(0.8, 2))
+
+# update the function so heads have probability p_head
+toss_coin <- function(n_flips, p_head) {
+  coin_sides <- c("head", "tail")
+  # Define a vector of weights
+  weights <- c(p_head, 1 - p_head)
+  # modify the sampling to  be weighted
+  sample(coin_sides, n_flips, replace = TRUE, prob = weights)
+}
+
+# Generate 10 coin tosses
+toss_coin(100, 0.6)
+
+#mean = total/n
+y <- c(1,2,3)
+mean(y)
+sum(y)
+length(y)
+
+mean_y <- function(x){
+  sum(x)/length(x)
+}
+mean_y(y)
+
+#####################################################################
+#################### Other important functions ######################
+#####################################################################
+## Loads of useful Functions
+# mean, sum, round, abs
+
+# Mathemetical utilities
+a1 <- c(1.1233, 31.1, -6.6786, 2.6786)
+a2 <- c(1.1221, -6.67676, 7.6767, 7.7877)
+sum(round(abs(a1)))
+sum(round(abs(a2)))
+
+mean(c(sum(round(abs(a1)))), sum(round(abs(a2)))) # first absolute value of a1 and a2, then row
+round(abs(a1), 3)
+
+# sort, rep & seq
+seq(8, 3, by = -2)
+rep(seq(8, 3, by = -2), times = 2)
+sort(rep(seq(8, 3, by = -2), times = 2))
+
+# Apply function
+
+#lets look for apply function
+?apply
+
+my.matrix <- matrix(c(1:8, 11:18, 21:28), nrow = 8, ncol = 3)
+my.matrix
+
+apply(my.matrix, 2, sum) # here 1 indicates rows if 2 it means columns
+apply(my.matrix, 1, sum)
+
+apply(my.matrix, 2, mean)
+
+#lapply
+#lapply treats the vector like a list
+#apply function over list or vector
+#output = list
+candy <- list(pop = 213123131, 
+              lop = c("Lol", "cal", "pal"),
+              cop = FALSE)
+print(candy)
+
+# we can use a for loop to find class of candy list
+for(i in candy){
+  print(class(i))
+}
+
+# similar things can be done using apply function
+lapply(candy, class)
+
+
+cities <- c("New York", "Paris", "London", "Tokyo", "Rio de Janerio", "Cape Town")
+
+
+num_chars <- c ()
+for(i in 1:length(cities)){
+  num_chars[i] <- nchar(cities[i])
+}
+num_chars
+
+# OR
+lapply(cities, nchar)
+unlist(lapply(cities, nchar))
+
+#lapply for calculation
+price <- list(12.123, 132.1231, 131.132, 323.2131, 2331.321)
+
+# now we want to multiply each by 3
+triple <- function(x){
+  3*x
+}
+
+result <- unlist(lapply(price, triple))
+result
+str(result)
+unlist(result)
+
