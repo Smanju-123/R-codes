@@ -1,0 +1,258 @@
+############################################### Syntax ############################################
+
+### Bar chart
+barplot(H,xlab,ylab,main, names.arg,col)
+
+
+### Pie chart
+pie(x, labels, radius, main, col, clockwise)
+
+
+### Box plot
+boxplot(y ~ x, data, xlab, ylab, main)
+boxplot(x, data, notch, varwidth, names, main)
+
+
+### Histogram
+hist(v,main,xlab,xlim,ylim,breaks,col,border)
+
+
+### Scatter plot
+plot(x, y, main, xlab, ylab, xlim, ylim, axes)
+
+
+### Line graphs
+plot(v,type,col,xlab,ylab)  
+
+
+
+# "p" to draw only the points,
+#"l" to draw only the lines and
+#"o" to draw both points and lines.
+# col is used to give colors to both the points and lines.
+
+
+# Line graph for food items sold 
+x <- c(2, 4, 6, 4, 2, 3)
+y <- c(2, 5, 6, 4, 5, 13)
+z <- c(3, 4, 3, 5, 3, 12)
+plot(y, type = "o", xlab = "Days", ylab = "Number of Boxes", main = "Food items sold", col ="#900C3F")+
+lines(x, type = "o", col = "#34495E")+    # Multiple Lines in a Line Chart
+lines(z, type = "o", col = "#9B59B6")+
+legend("topright", legend = c("Donuts", "Buegers", "Pizzas"), col = c("#900C3F", "#34495E", "#9B59B6"),
+       lty = 1:2, cex = 0.8, pch = 19)
+
+
+### Bar chart
+barplot(H,xlab,ylab,main, names.arg,col)
+
+# names.arg is a vector of names appearing under each bar.
+# col is used to give colors to the bars in the graph.
+
+# Plot the revenue bar chart according to months
+
+H <- c(7,12,28,3,41)
+M <- c("Mar","Apr","May","Jun","Jul")
+
+barplot(H,names.arg=M,xlab="Month",ylab="Revenue",col="cyan",
+        main="Revenue chart",border="darkblue")
+
+
+
+# Group Bar Chart and Stacked Bar Chart
+
+# Create the input vectors.
+colors = c("cyan","azure","lavender")
+months <- c("Mar","Apr","May","Jun","Jul")
+regions <- c("East","West","North")
+
+# Create the matrix of the values.
+Values <- matrix(c(2,9,3,11,9,4,8,7,3,12,5,2,8,10,11), nrow = 3, ncol = 5, byrow = TRUE)
+
+# Create a horizontal and vertical stacked bar chart
+barplot(Values, main = "Total revenue", names.arg = months, xlab = "Month", ylab = "Revenue", col = colors, horiz = T)
+barplot(Values, main = "Total revenue", names.arg = months, xlab = "Month", ylab = "Revenue", col = colors, horiz = F)
+
+# Add the legend to the chart
+legend("topright", regions, fill = colors)
+
+######################################## Graphs ################################################################
+
+########## Graphs basics###########
+
+# Histogram
+head(airquality)
+hist(airquality$Ozone)
+with(airquality, plot(Wind, Ozone))
+
+############### R data visualization ##########
+
+
+x <- 1:10
+x1 <- 2*x
+x2 <- x*x
+
+
+#plots with multiple lines
+# Create a first line
+plot(x1, x2, type = "b", frame = FALSE, pch = 19,
+     col = "red", xlab = "x", ylab = "Y")
+
+# histogram
+
+airquality
+
+head(airquality)
+hist(airquality$Ozone)
+with(airquality, plot(Wind, Temp))
+
+airquality <- transform(airquality, Month = factor(Month))
+airquality
+
+# boxplot
+boxplot(Ozone ~ Wind, airquality, xlab = "wind axis", ylab = "ozone axis")
+
+# adding title
+with(airquality, plot(Wind, Ozone))
+title(main = "Ozone an dwind in New york city")
+
+
+# adding colour
+with(airquality, plot(Wind, Ozone), main = "New york city")
+with(subset(airquality, Month == 5), points(Wind, Ozone, col = "red"))
+with(subset(airquality, Month == 6), points(Wind, Ozone, col= "blue"))
+with(subset(airquality, Month == 7), points(Wind, Ozone, col = "green"))
+
+# Base plot with aanotation
+with(airquality, plot(Wind, Ozone), main = "New york city")
+with(subset(airquality, Month == 5), points(Wind, Ozone, col = "red"))
+with(subset(airquality, Month != 6), points(Wind, Ozone, col= "blue"))
+with(subset(airquality, Month != 7), points(Wind, Ozone, col = "green"))
+legend("topright", pch = 1, col = c("blue", "pink"), legend = C("May", "Other May"))
+
+# R base scatter plot : plot()
+head(mtcars)
+x <- mtcars$wt
+y <- mtcars$mpg
+# Plot with main and axis titles
+# Change point shape (pch = 19) and remove frame.
+plot(x, y, main = "Main title",
+     xlab = "X axis title", ylab = "Yaxis title", 
+     pch = 19, frame  = FALSE)
+
+# Add regression line
+plot(x, y, Main = "Main title", 
+     xlab = "xaxis", ylab = "yaxis", 
+     pch = 19, frame = FALSE)
+abline(lm(y ~ x, data = mtcars), col = "red", lwd = 2)
+
+# Add lowess fit
+plot(x, y, main = "Main title",
+     xlab = "X axis title", ylab = "Yaxis title", 
+     pch = 19, frame  = FALSE)
+lines(lowess(x, y), col = "blue")
+
+# Box plots - R Base Graphs
+head(ToothGrowth, 10)
+
+# Basic Box plots
+# Box plot of one variable
+boxplot(ToothGrowth$len)
+# Box plots by groups (dose)
+#remove frame
+boxplot(len ~ dose, data = ToothGrowth, frame = FALSE)
+
+# change group names
+boxplot(len ~ dose, data = ToothGrowth, frame = FALSE, 
+        names = c("D0.5", "D1", "D2"))
+
+# Change color
+# change the color of the border using one single color
+boxplot(len ~ dose, data = ToothGrowth, frame = FALSE, 
+        border = "steelblue")
+
+# change the color of border.
+# use different colors for each group
+boxplot(len ~ dose, data = ToothGrowth, frame = FALSE, 
+        border = c("red", "pink", "yellow"))   
+# or we can use html hexadecimal colors
+
+# change fill color : single color
+boxplot(len ~ dose, data = ToothGrowth, frame = FALSE, 
+        col = "steelblue")
+# change fill color : single color
+boxplot(len ~ dose, data = ToothGrowth, frame = FALSE, 
+        col = c("red", "pink", "yellow"))
+
+# box plot with multiple groups
+boxplot(len ~ dose, data = ToothGrowth, 
+        col = c("red", "pink"), frame = FALSE)
+
+# bar plots - r base graphs
+x <- VADeaths[1:3, "Rural Male"]
+x
+# bar plot of one variable
+barplot(x)
+# horizontal bar plot
+barplot(x, horiz = TRUE)
+
+# change group names
+barplot(x, names.arg = c("a", "b", "c"))
+
+# change border and fill color using one single color
+barplot(x, col = "white", border = "steelblue")
+
+# change the color of the border
+# use different colors for each group
+barplot(x, col = "white", border =c("steelblue", "pink", "black") )
+
+# change fill color : single color
+barplot(x, col = "steelblue" )
+
+# change fill color : multiple colors
+barplot(x, col = c("steelblue", "pink", "black"))
+
+# line plots - R base graphs
+plot(x, y, type = "1", lyt = 1)
+lines(x, y, type = "l", lyt = 1)
+
+# create some variables
+x <- 1:10
+y1 <- x*x
+y2 <- 2*y1
+x
+y1
+y2
+
+# plots with multiple lines
+# create a first line
+plot(x, y1, type = "b", frame = FALSE, pch = 19, 
+     col = "red", xlab = "X", ylab = "y")
+#add a second line
+lines(x, y2, pch = 18, col = "blue", type = "b", lty = 2)
+
+# add a legend to the plot
+legend("topleft", legend = c("Line 1", "Line 2"), 
+       col = c("red", "blue"),lty = 1:2, cex = 0.8)
+
+#geometrics
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) +
+  geom_jitter(alpha = 0.6)
+
+#Facets
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) +
+  geom_jitter(alpha = 0.6) + 
+  facet_grid(.~ Species)
+
+#statiscs
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) +
+  geom_jitter(alpha = 0.6) + 
+  facet_grid(.~ Species)
+stat_smooth(method = "lm", se = F, col = "red")
+
+# grouping by fills
+head(mtcars)
+str(mtcars)
+table(mtcars$cyl)
+ggplot(mtcars, aes(x = factor(cyl), fill = factor(am))) +
+  geom_bar()
