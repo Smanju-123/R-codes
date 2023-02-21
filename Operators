@@ -1,0 +1,12 @@
+# Not operator !
+!TRUE
+!FALSE
+x <- 2
+!(x < 5)
+
+### Logical operators and vectors
+c(TRUE, TRUE, FALSE) & c(TRUE, FALSE, FALSE) & c(FALSE, FALSE, FALSE)
+c(TRUE, TRUE, FALSE) | c(TRUE, FALSE, FALSE)
+!c(TRUE, TRUE, FALSE)
+
+
