@@ -1,0 +1,113 @@
+###### plotly #######
+
+#######Plotly
+library(plotly)
+# Scatter plot
+fig <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Petal.Length)
+fig
+
+fig <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Petal.Length, 
+               marker = list(size = 10, 
+                             color = 'blue',
+                             line = list(color = 'red',
+                                         width = 1)))
+fig
+fig <- fig%>%
+  layout(title = 'Customized Scatter plot',
+         yaxis = list(zeroline = FALSE),
+         xaxis = list(zeroline = FALSE))
+fig
+# marker = used to customize the style of filling, list( size = size of dots, 
+# color = 'filling color of dots', line = list(color = 'color of dot borders',
+# width = size of dot borders
+
+# layout = modify the layout of a plotly visualization(title = main title of chart,
+# yaxis = list(zeroline = Determines whether or not a line is drawn at along
+# the 0 value of this axis. If "TRUE", the zero line is drawn on the top of the grid lines.)
+
+# Plotting Markers and Lines
+
+# Data Preparation
+
+#3 types of super market categories are listed below with average number of sales in a period.
+x <- c(2015:2020)
+Beverages <- rnorm(x, mean = 10)
+Grocery <- rnorm(x, mean = 1)
+Snack <- rnorm(x, mean = 5)
+
+df <- data.frame(x, Beverages, Grocery, Snack)
+df
+# Data Visualization
+fig <- plot_ly(data= df, x = ~x, marker = list(size = 10))
+fig
+
+fig <- fig %>%
+  add_trace(y = ~Beverages, name = 'Beverage', mode = 'lines')
+fig
+
+fig <- fig %>%
+  add_trace(y = ~Grocery, name = 'Grocery', mode = 'lines+markers')
+
+fig
+
+fig <- fig %>%
+  add_trace(y = ~Snack, name = 'Snack', mode = 'markers')
+fig
+
+fig <- fig %>%
+  layout(title = 'Sales by Categories Between 2015 & 2020',
+         yaxis = list(tilte = 'Average Sales'),
+         xaxis = list(title = 'Time'))
+fig
+
+#Adding Color and Size Mapping
+diamonds
+df <- diamonds
+df <- diamonds[sample(nrow(diamonds), 1000), ]
+fig <- plot_ly(data = df, x = ~carat, y = ~price, color = ~carat, size = ~carat)
+fig
+
+## Line plot
+# Data Preparation
+
+day <- c(1:30)
+number_of_order <- rnorm(30, mean = 3)
+df <- data.frame(day, number_of_order)
+df
+
+# Data Visualization
+
+fig <- plot_ly(df, x = ~day, y = ~number_of_order, type = 'scatter', mode = 'lines') %>%
+  layout(title = 'Number of Daily Orders in a Month',
+         yaxis = list(title = 'Number of Order'),
+         xaxis = list(title = '1 Month'))
+
+fig
+
+## Style Line Plots
+month <- c('January', 'February', 'March', 'April', 'May', 'June', 'July', 
+           'August', 'September', 'October', 'November', 'December')
+vegetable <- c(32.23, 23.45, 56.67, 54.43, 56.56, 45.4, 43.43, 34.53, 54.65, 67.56, 43.3, 34.243)
+Fruits <- c(12.12, 34.23, 34.234, 32.2, 23.45, 45.5, 67.6, 32.23, 34.23, 33.33, 44.44, 22.22)
+Poultry <- c(23.33, 44.34, 54.45, 56.54, 23.23, 43.4, 23.45, 34.34, 23.23, 45.45, 23.23, 34.34)
+df <- data.frame(month, vegetable, Fruits, Poultry)
+df
+df$month <- factor(df$month, levels = df[["month"]])
+
+# Data Visualization:
+
+fig <- plot_ly(data = df, x = ~month, y = ~vegetable, name = 'Vegetable', 
+               type = 'scatter', mode = 'lines',
+               line = list(color = 'blue', width = 4))
+fig
+fig <- fig %>% add_trace(y = ~Fruits, name = 'Fruits', 
+                         line = list(color = 'red', width = 4, dash = 'dot'))
+fig
+fig <- fig %>% add_trace(y = ~Poultry, name = 'Poultry', 
+                         line = list(color = 'green', width = 4, dash = 'dash'))
+fig
+fig <- fig %>% layout(title = "Average Sales by Parts of Supermarkets", 
+                      xaxis = list(title = "Months"), 
+                      yaxis = list(title = "Average Shopping"))
+
+fig
