@@ -1,0 +1,27 @@
+####################### R - Packages ######################
+
+
+### Check Available R Packages 
+
+# Get library locations containing R packages
+.libPaths()
+
+# Get the list of all the packages installed
+library()
+
+# Get all packages currently loaded in the R environment
+search()
+
+
+
+### Install a New Package
+# Install directly from CRAN
+install.packages("Package Name")
+
+# Install the package named "XML".
+install.packages("XML")
+
+
+### Load Package to Library
+# Load the package named "XML"
+library(XML)
