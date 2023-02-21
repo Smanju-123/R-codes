@@ -1,0 +1,82 @@
+################# Descriptive Statistics ##############
+
+########## Index
+
+# reading data set
+# statistical information about the data set
+# dealing with null values
+# Standardization, normalization
+
+
+# Creating a list
+my_list<- list(c(1, 1, 1), TRUE, 2+3i, "hello", 2:7);my_list
+
+# Creating a table
+Anime<-table(ID_of_name = c(28891, 23273, 34599), 
+            Title = c("Haikyuu!! Second Season", "Shigatsu wa Kimi no Uso", "Made in Abyss"), 
+            genre = c("['Comedy', 'Sports', 'Drama', 'School', 'Shounen']", "['Drama', 'Music', 'Romance', 'School', 'Shounen']", "['Sci-Fi', 'Adventure', 'Mystery', 'Drama', 'Fantasy']"), 
+            Aired = c("Oct 4, 2015 to Mar 27, 2016", "Oct 10, 2014 to Mar 20, 2015", "Jul 7, 2017 to Sep 29, 2017"), 
+            episodes = c(25.0, 22.0, 13.0), 
+            Members = c(489888, 995473, 581663), 
+            popularity = c(141, 28, 98), 
+            ranked = c(25.0, 24.0, 23.0), 
+            Score = c(8.82, 8.83, 8.83))
+View(Anime)
+# Creating a tuple
+
+
+# Creating a dictionary
+
+
+# Aggregation values in r
+
+mean
+median
+max
+min
+range
+sum
+count
+
+# Creating a table
+fest<-data.frame(festival_name = c("christmas", "pongal", "new year", "navratri","holi", "diwali", "eid", "onam", "rakshabandham", "shivratri" ), 
+                Shopping_items = c("jeans", "shirts", "shorts", "mobiles", "tabs", "pcs", "ear buds", "mobile cases", "sarees", "suits"),
+                Good_sales = c(1, NA, 0, 1, NA, 1, 1, 0, 1, NA), 
+                sales = c(NA, 2000, 100, 20000, NA, 50000,30000, NA, 25000, 1000),
+                Percent_of_people = runif(10), 
+                discounts = c(NA, "no", NA, "no", "yes","no",  NA,"no", "yes", NA) )
+
+
+# EDA for a data set
+
+View(fest)
+str(fest)
+summary(fest)
+names(fest)
+
+# Dealing with NA values
+is.na(fest)
+is.null(fest)
+colSums(is.na(fest))
+
+
+########### Standardization vs Normalization #############
+
+# New column
+Salaries <- data.frame(Salaries = c(25000, 345254, 43324, 34624534, 436466), 
+                       Sex = c("male", "female", "male", "male", "female"), 
+                       salaries_reached = c("yes", "yes", "yes", "no", "no"))
+Salaries
+
+# Standardize the column by using "Scale function"
+scale(Salaries$Salaries)
+
+
+
+# Convert the Gender column into 0 and 1
+ifelse(Salaries$Sex=="male", 1, 0)->Salaries$Sex
+Salaries
+
+# Convert the salaries reached column into 0 and 1 and may be
+ifelse(Salaries$salaries_reached=="yes", 1, 0)->Salaries$salaries_reached
+Salaries
