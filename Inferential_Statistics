@@ -1,0 +1,62 @@
+########## Inferential Statistics #########
+
+############## Basic graphs ############
+
+# Anime data 
+Anime<-data.frame(ID_of_name = c(28891, 23273, 34599), 
+                  Title = c("Haikyuu!! Second Season", "Shigatsu wa Kimi no Uso", "Made in Abyss"), 
+                  genre = c("['Comedy', 'Sports', 'Drama', 'School', 'Shounen']", "['Drama', 'Music', 'Romance', 'School', 'Shounen']", "['Sci-Fi', 'Adventure', 'Mystery', 'Drama', 'Fantasy']"), 
+                  Aired = c("Oct 4, 2015 to Mar 27, 2016", "Oct 10, 2014 to Mar 20, 2015", "Jul 7, 2017 to Sep 29, 2017"), 
+                  episodes = c(25.0, 22.0, 13.0), 
+                  Members = c(489888, 995473, 581663), 
+                  popularity = c(141, 28, 98), 
+                  ranked = c(25.0, 24.0, 23.0), 
+                  Score = c(8.82, 8.83, 8.83))
+Anime
+
+# Line graph for popularity
+plot(Anime$popularity,Anime$Score, 
+     type = "o" , lty = 19,
+     xlab = "Anime popularity", ylab = "Anime Score",
+     main = "Best Anime", col = "blue", pch = 19)
+
+# Pie chart for Anime ranks
+pie(Anime$ranked, 
+    main = "Top ranked Anime", col = c("blue", "green", "red"),
+    clockwise = T)+
+  legend("topright", legend = c("Haikyuu!! Second Season", "Shigatsu wa Kimi no Uso", "Made in Abyss"), 
+         col = c("blue", "green", "red"), lty = 1:2, pch = 19)
+
+# Bar plot for Anime members
+barplot(Anime$episodes, 
+        names.arg = c("Haikyuu!! Second Season", "Shigatsu wa Kimi no Uso", "Made in Abyss") , 
+        col = c("blue", "green", "red"), 
+        xlab = "Anime title", ylab = "Episodes",
+        main = "Episodes per Anime")+
+        legend("topright",legend =c("Haikyuu!! Second Season", "Shigatsu wa Kimi no Uso", "Made in Abyss") , col =c("blue", "green", "red"), pch = 19, cex = 0.8)
+
+# Histogram for Score
+hist(Anime$Score, col = c("blue", "green", "red"), 
+     names.arg = c("Haikyuu!! Second Season", "Shigatsu wa Kimi no Uso", "Made in Abyss"),
+     xlab = "Anime title", main = "Score Per Anime", ylab = "Score")+
+  legend("topright",legend =c("Haikyuu!! Second Season", "Shigatsu wa Kimi no Uso", "Made in Abyss") , 
+         col =c("blue", "green", "red"), pch = 19, cex = 0.8)
+
+
+######### Graphs using ggplot2 ################
+
+library(ggplot2)
+iris
+
+# Barplot for Species
+ggplot(iris, aes(Species), col = Species)+geom_bar(position = "identity")
+
+# Line graph
+ggplot(iris, aes(Sepal.Length, Sepal.Width))+geom_line()
+       
+# Histogram
+ggplot(iris, aes(Petal.Length))+geom_histogram()
+
+# Pie chart
+ggplot(iris, aes(Species))+geom_bar()->pie
+pie + coord_polar(start=0)         #theta = "y"
