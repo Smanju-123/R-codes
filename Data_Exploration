@@ -1,0 +1,202 @@
+############ R vectors, matrices, data visualization ##########
+
+
+# Basic R operations and concepts
+
+######## Arithmetic
+# Anything typed after a # is ignored by R
+
+2 + 3 # add
+
+3 * 2 / 5 # multiply and divide
+
+7^8 # 7 to the 8th power
+
+sqrt(3) # square
+
+exp(1) # Euler's constant, e
+
+pi
+
+# Assignment, Object names and data types
+x <- 7*31/pi # don't see the calculated value
+
+x # take a look
+print(x)
+
+
+#################### Vector #######################
+###################################################
+
+# 73, 67 87, 68, 68, 78, 98
+# c is concatination
+my_numeric <- c(21.3, 23.23, 23.23, 12.12, 12.12, 12.18)
+my_numeric
+print(my_numeric)
+
+
+my_character <- c("USA", "India", "Brazil")
+my_character
+
+my_logical <- c(TRUE, FALSE, TRUE)
+my_logical
+
+my_integers <- c(1239870, 879,807680)
+my_integers
+
+## Checking class of a vector
+class()
+typeof(my_numeric)
+class(my_numeric)
+class(my_character)
+class(my_logical)
+class(my_integers)
+
+################### Naming a vector ##################
+
+# Number of cases in USA from monday to friday
+USA_vector <- c(7895787, 789597,97567895)
+USA_vector
+
+# Number of cases in India from monday to friday
+India_vector <- c(78958,7897689,8796789)
+India_vector
+
+# Naming a vector
+days_vector <- c("monday", "tuesday", "wednesday")
+days_vector
+
+# Now assign days vector
+names(USA_vector) <- days_vector
+USA_vector
+
+
+names(India_vector) <- days_vector
+India_vector
+
+############# Adding vectors #############
+total_daily <- USA_vector + India_vector
+total_daily
+
+# Adding total for USA
+total_USA <- sum(USA_vector)
+total_USA
+
+# Adding total for India
+total_India <- sum(India_vector)
+total_India
+
+# Total cases
+total_week <- total_USA +total_India
+total_week
+
+########################################################
+################### Matrix #############################
+########################################################
+matrix()
+matrix(1:9, byrow = FALSE, nrow = 3)
+
+# Top three countries with corona
+USA <- c(7586767, 6578567)
+INdia <- c(86089609870, 9868687687)
+Brazil <- c(8778068,689608608)
+
+# Create Box office
+Top_three <- c(USA, India,Brazil)
+Top_three
+
+# Construct matrix
+Top_matrix <- matrix(Top_three, nrow = 3, byrow = TRUE)
+Top_matrix
+
+### Naming a matrix
+# Naming the column with region
+colnames(Top_matrix) <- c("Total case", "Total Death")
+
+# Name the rows with title
+rownames(Top_matrix) <- c("USA", "India", "Brazil")
+Top_matrix
+
+### Adding column in matrix(col$ums) or rowSums
+Top_three_c <- c(65765, 767686, 7808967, 767587)
+Top_matrix_1 <- matrix(Top_three_c, nrow = 3, byrow = TRUE,
+                       dimnames = list(c("USA", "India", "Brazil"), c("Total Case", "Total Death")))
+
+Top_matrix_1
+
+library(ggplot2)
+# Create Elegant Data Visualisations using the Grammar of Graphics
+
+library(MASS)
+# Supports functions and datasets for Venebles and Ripley's MASS
+
+library(scales) # functions trans_breaks and trans_format
+# Scale functions for Visualization
+
+library(tidyr)
+# Tidy Messy Data
+
+library(datasets) # Practice-2000:3000 datasets
+
+
+
+# # # Why ggplot2, some examples
+
+head (mammals)
+
+# Scatterplot
+
+
+
+#aesthetics
+aes(x = mpg, y = wt)
+aes(mpg, wt)
+
+# You can also map aesthetics to functions of variables
+aes(x = mpg ^ 2, y = wt / cyl)
+
+# Or to constants
+aes(x = 1, colour = "smooth")
+
+
+############################ Reading & Writing ###############################
+##############################################################################
+###### Reading files in R
+
+search()
+# Installing packages in R
+install.packages("readxl") # internet is must
+
+if(!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager") 
+BiocManager::install("DESeq2")
+
+# Reading a package in R
+require(readr)
+
+## First step is to know your current directory
+getwd()
+
+## Setting your working directory
+## Files are supposed be in same directory or
+## We have to give a full path
+setwd("C:/Users/DELL/OneDrive/Documents")
+
+## Reading data using base packkages
+
+### Using read.table
+# Read any tabular file as data frame
+# Number of arguments is huge
+
+########################### Read a csv file ##############################
+states <- read.table("states.csv",
+                     header = TRUE,
+                     sep = ",", 
+                     stringAsFactors = FALSE)
+
+str(states)
+states
+
+# Lets check the structure of data set
+str()
+
