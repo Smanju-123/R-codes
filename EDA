@@ -1,0 +1,134 @@
+################### EDA ######################
+titanic <- read.csv(choose.files(), header = T)
+str(titanic)
+head(titanic)
+tail(tiatnic)
+View(titanic)
+nrow(titanic)
+ncol(titanic)
+names(titanic)
+summary(titanic)
+class(titanic$Sex)
+#as.factor(dataset$colname)
+as.factor(titanic$Sex)
+as.null(titanic)
+is.null(titanic$pclass)
+is.na(titanic)
+# null values 
+library(ggplot2)
+ggplot(titanic, aes(Survived))+geom_bar(alpha = 0.5)
+
+# ratio of people alive and dead
+prop.table(table(titanic$Survived))
+
+reliance <- read.csv(choose.files(), header = T)
+
+str(shopping)
+names(shopping)
+summary(shopping)
+View(shopping)
+head(shopping)
+tail(shopping)
+as.factor(shopping$Answer)
+as.factor(shopping$Question)
+as.factor(shopping$Segment.Type)
+as.factor(shopping$Segment.Description)
+
+ggplot(shopping, aes(Answer,Count, fill = Answer))+geom_bar(stat = "identity", width = 0.2)
+prop.table(table(shopping$Answer))
+str(reliance)
+View(reliance)
+names(reliance)
+head(reliance)
+tail(reliance)
+as.factor(reliance$Symbol)
+as.factor(reliance$Series)
+as.factor(reliance$Prev.Close)
+as.factor(reliance$Trades)
+as.factor(reliance$X.Deliverble)
+ggplot(reliance, aes(Date, Turnover, colour = Date))+geom_point()+stat_smooth(Count~Turnover, se = F, col = "red")
+
+library(ISLR)
+Carseats
+
+# To check null values
+is.na(Carseats)
+is.null(Carseats)
+
+# class of dataset
+lapply(Carseats, class)
+str(Carseats)
+
+# statistical understanding
+summary(Carseats)
+library(Hmisc)
+describe(Carseats)
+
+
+# Checking normality range
+normality(Carseats$Sales)
+library(nortsTest)
+normal.test(Carseats$Sales)
+
+# Get the data of US and in urban based on sales and income
+library(dplyr)
+Carseats%>%
+  group_by(US, Urban)%>%
+  filter(Urban=="Yes")%>%
+  summarise(Sales, Income)
+
+# Correlation
+library(corrr)
+correlate(Carseats)
+
+# correlate between income and sales
+library(corrr)
+correlate(Carseats)
+View(Carseats)
+
+# correlation plot
+library(dplyr)
+Carseats%>%
+  correlate()%>%
+  plot()
+
+bike_buyers<-read.csv(choose.files(), header = T)
+
+# structure of dataset
+str(bike_buyers)
+
+# Class of a dataset
+lapply(bike_buyers, class)
+
+# Levels in a column
+table(bike_buyers$Commute.Distance)
+
+# Converting a column into factor
+bike_buyers$Gender<-as.factor(bike_buyers$Gender)
+bike_buyers$Marital.Status<-as.factor(bike_buyers$Marital.Status)
+bike_buyers$Home.Owner<-as.factor(bike_buyers$Home.Owner)
+bike_buyers$Gender<-as.factor(bike_buyers$Gender)
+bike_buyers$Purchased.Bike<-as.factor(bike_buyers$Purchased.Bike)
+
+# Verifying null values 
+is.null(bike_buyers)
+
+colSums(is.na(bike_buyers))
+
+# Histogram for income
+hist(bike_buyers$Income, main="Bike buyers", xlab="Income",col="blue",border="pink")
+
+# Working on airquality dataset
+airquality
+str(airquality)
+
+
+# Class of month in airquality
+class(airquality$Month)
+
+# Convert Month from integer to factor
+airquality$Month<-as.factor(airquality$Month)
+
+
+# No. of NA values airquality dataset per each column
+colSums(is.na(airquality))
