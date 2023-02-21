@@ -1,0 +1,235 @@
+###################### 20-10-2022 ######################### ggplot ###
+
+library(ggplot2)
+library(MASS)
+library(scales) # functions trans_breaks and trans_format
+library(tidyr)
+
+head(mammals)
+
+# why ggplot2, some examples
+
+# Scatter plot
+mammals %>%
+  ggplot(aes(x = body, y = brain))+
+  geom_point()
+
+#Explore-statistics
+ggplot(mammals, aes(x = body, y = brain))+
+  geom_point(alpha = 0.5)+
+  stat_smooth(method = "lm", col = "red", se = FALSE)
+
+# Explore - fine tuning
+ggplot(mammals, aes(x = body, y = brain))+
+  geom_point(alpha = 0.6)+
+  coord_fixed()+
+  scale_x_log10()+
+  scale_y_log10()+
+  stat_smooth(method = "lm", col = "red", se = FALSE)
+
+tail(iris)
+table(iris$Species)
+
+#Geometrics
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width))+
+  geom_jitter(alpha = 0.6)
+
+#Facets
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width))+
+  geom_jitter(alpha = 0.6)+
+  facet_grid(.~Species)
+
+#Statistics
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width))+
+  geom_jitter(alpha = 0.6)+
+  facet_grid(.~Species)+
+  stat_smooth(method = "lm", se = F, col = "red")
+
+
+#Coordinates
+levels(iris$Species) <- c("Setosa", "Versicolor", "Verginica")
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width))+
+  geom_jitter(alpha = 0.6)+
+  facet_grid(.~Species)+
+  stat_smooth(method = "lm", se = F, col = "red")+
+  scale_y_continuous("Sepal.Width(cm)", 
+                     limits = c(2, 5),
+                     expand = c(0, 0))+
+  scale_x_continuous("Sepal.Length(cm)", 
+                     limits = c(4, 8),
+                     expand = c(0,0))+
+  coord_equal ()
+
+
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width))+
+  geom_point(col = "blue")+
+  geom_point(aes(x = Petal.Length, y = Petal.Width), col = "red")
+
+# Grouping by fills
+head(mtcars)
+str(mtcars)
+table(mtcars$cyl)
+ggplot(mtcars, aes(x = factor(cyl), fill = factor(am)))+
+  geom_bar()
+
+ggplot(mtcars, aes(x = mpg))+
+  geom_histogram(fill = "skyblue")+
+  geom_freqpoly(col = "red")+
+  geom_bar(col= "pink")
+
+#Q: Create a scatterplot using Sepal.Length and
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, col = Species))+
+  geom_point()
+
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, col = Species))+
+  geom_point()+
+  geom_smooth()
+
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, col = Species))+
+  geom_point()+
+  geom_smooth(se = F)
+
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, col = Species))+
+  geom_point()+
+  geom_smooth(se = F, span = 0.4)
+
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, col = Species))+
+  geom_point()+
+  geom_smooth(method = "lm")
+
+
+################# 26-10-2022 ################# ggplot_basics ########################
+
+
+customer_churn <- read.csv(file.choose(), header = T)
+
+#Geom_Boxplot
+library(ggplot2)
+ggplot(data = customer_churn, aes(y = MonthlyCharges, x = InternetService)) + geom_boxplot()
+ggplot(data = customer_churn, aes(y = MonthlyCharges, x = InternetService)) + geom_boxplot(fill = "cyan")
+ggplot(data = customer_churn, aes(y = MonthlyCharges, x = InternetService)) + geom_boxplot(fill = "cyan", outlier.colour = "red")
+ggplot(data = customer_churn, aes(y = MonthlyCharges, x = InternetService)) + geom_boxplot(fill = "cyan", outlier.colour = "red", outlier.shape = 2)
+ggplot(data = customer_churn, aes(y = MonthlyCharges, x = InternetService, fill = gender)) + geom_boxplot()
+
+#Facet_Grid
+ggplot(data = customer_churn, aes(x = tenure, fill = InternetService)) + geom_histogram() ->g1
+g1 + facet_grid(~InternetService)
+ggplot(data = customer_churn, aes(x= tenure, y = TotalCharges, col = Contract)) + geom_point() + geom_smooth() ->g2
+g2 + facet_grid(~Contract)
+ggplot(data = customer_churn, aes(y = MonthlyCharges, x = tenure, fill = InternetService)) + geom_boxplot() ->g3
+g3 + facet_grid(~InternetService)
+
+#Theme_Layer
+ggplot(data = customer_churn, aes(x = tenure))+geom_histogram(col = "cyan", fill = "cornsilk") -> g1
+g1 + labs(title = "Distribution of tenure") ->g2
+g2 + theme(panel.background = element_rect(fill = "bisque4")) ->g3
+g3 + theme(plot.background = element_rect(fill = "coral4")) ->g4
+g4 + theme(plot.title = element_text(hjust = 0.5, face = "bold", colour = "peachpuff"))
+
+ggplot(data = customer_churn, aes(y = MonthlyCharges, x = tenure, col = InternetService))+geom_smooth() ->t1
+t1 + labs(title = "TotalCharges vs tenure", x = "TotalCharges", y = "tenure") ->t2
+t2 + theme(panel.background = element_rect(fill = "azure")) ->t3
+t3 + theme(plot.background = element_rect(fill = "thistle")) ->t4
+t4 + theme(plot.title = element_text(hjust = 0.5, face = "italic", colour = "whitesmoke"))
+
+
+ggplot(data = customer_churn, aes(y = MonthlyCharges, x= InternetService))+geom_boxplot(fill = "cyan", outlier.colour ="blue", outlier.shape = 4)
+
+ggplot(data = customer_churn, aes(x = tenure)) + geom_histogram(fill = "cyan") + facet_grid(~gender)
+
+ggplot(data = customer_churn, aes(x = tenure))+
+  geom_bar()+
+  labs(title = "Distribution of tenure", x = "tenure")+
+  theme(panel.background = element_rect(fill = "cyan"))+
+  theme(plot.background = element_rect(fill = "blue")) + 
+  theme(plot.title = element_text(hjust = 0.6, face = "italic", colour = "cyan"))
+
+library(ggplot2)
+# Add title
+ggplot(iris, aes(Sepal.Length, Sepal.Width, col=Species))+
+  geom_point()+
+  labs(x = "SL(cm)", y = "SW")+
+  ggtitle("Sepal Width and length")
+
+# add text
+ggplot(iris, aes(Sepal.Length, Sepal.Width, col=Species))+
+  geom_point()+
+  annotate("text", x=6, y = 5, label = "main")+
+  annotate("text", x= 5:7, y = 4:6, label = "main")
+
+# highlight an area
+ggplot(iris, aes(Sepal.Length, Sepal.Width, col=Species))+
+  geom_point()+
+  annotate("rect", xmin = 5, xmax = 7, ymin = 4, ymax = 5, 
+           alpha = 0.5, fill = "cyan")
+# Add a line
+ggplot(iris, aes(Sepal.Length, Sepal.Width, col=Species))+
+  geom_point()+
+  annotate("segment", x = 5, xend = 4,y = 3, yend = 5, col = "blue")
+
+ggplot(mtcars, aes(cyl, mpg, col = cyl))+
+  geom_point(alpha = 0.7)+
+  ggtitle("Mtcars")+
+  annotate("text", x = 3, y = 5, label = "values", col="green")+
+  annotate("rect", xmin = 3, ymax = 4, xmax = 3, ymin = 5, col = "blue")+
+  annotate("segment", x = 3, yend = 4, xend = 3, y = 5, col = "blue")
+
+### Working with legends
+
+# Remove legend
+ggplot(iris, aes(Sepal.Length, Sepal.Width, col=Species))+
+  geom_point()+
+  theme(legend.position  = "none")
+
+#Change legend position
+ggplot(iris, aes(Sepal.Length, Sepal.Width, col=Species))+
+  geom_point()+
+  theme(legend.position = "top")
+
+# Hide legend title
+ggplot(iris, aes(Sepal.Length, Sepal.Width, col=Species))+
+  geom_point()+
+  theme(legend.title = element_blank())
+# legend font style
+ggplot(iris, aes(Sepal.Length, Sepal.Width, col=Species))+
+  geom_point()+
+  theme(legend.title = element_text(face = "bold", colour = "pink", size = 10))+
+  theme(legend.text = element_text(face = "italic", colour = "blue", size = 8))
+
+airquality
+table(airquality$Month)
+
+# ggplot with themes
+ggplot(airquality, aes(Ozone, Wind, colour = Month))+
+  geom_point(alpha = 0.6)+
+  theme(legend.title = element_text(colour = "blue", face = "bold", size = 10))+
+  theme(legend.text = element_text(colour = "pink", size = 8, face = "bold"))+
+  theme(legend.position = "top")
+
+
+### Scatter and jitter plot
+ggplot(iris, aes(Sepal.Length, Sepal.Width, col=Species))+
+  geom_point(shape = 1)+
+  geom_smooth(method = "lm", se = F)
+ggplot(iris, aes(Sepal.Length, Sepal.Width, col=Species))+
+  geom_jitter()
+ggplot(iris, aes(Sepal.Length, Sepal.Width, col=Species))+
+  geom_point()
+
+## bar and histogram
+
+library(ggplot2)
+diamonds
+#different colors and clarity column
+lapply(diamonds, class)
+
+View(diamonds)
+
+
+# Allot random colours to bars and create a barplot using ggplot2
+ggplot(diamonds, aes(color, fill=color), xlab("color"))+geom_bar()
+
+# Allot color specific colour
+ggplot(diamonds, aes(color))+geom_bar(fill=c("cyan", "coral", "azure", "bisque", "aquamarine", "green", "blue"))
+
+
