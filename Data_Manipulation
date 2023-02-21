@@ -1,0 +1,57 @@
+############# R Data manipulation ##########
+
+#data manipulation
+
+c(3,2,5,6) -> a
+c(2,3,6,7) -> b
+paste(a,b,sep = '.')
+
+#sorting
+
+D <- data.frame(x=c(1,2,3,1), y=c(2,3,5,6))
+D
+
+# sorting on x - it arranges according to the position and as p
+
+indexes <- order(D$x)
+indexes
+
+# to arrange the sorted values as per x
+
+D[indexes,]
+
+# print sorted values in reverse by y
+
+D[rev(order(D$Y)),]
+
+
+# merge function
+
+A <- data.frame(leter=LETTERS[8:12],index=1:5)
+A                
+
+# Random alphaet generation
+# here runif can be random nos and it must be equal to no of columns
+
+B <- data.frame(letter=LETTERS[1:10], b=runif(10))
+B
+
+# Merge # acts as an inner join
+
+merge(A,B)
+
+# merge as an a full outer join
+
+merge(A,B,all=TRUE)
+
+# splitting
+
+chars <- strsplit("the rat sat on the mat", split = character(3))
+chars
+
+
+#vectorised operations
+x <- 1:6
+y <- 16:21
+z <- x+y
+z
